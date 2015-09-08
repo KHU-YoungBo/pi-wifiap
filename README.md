@@ -73,7 +73,7 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
 
 0. 호스트 컴퓨터와 Raspberry Pi를 크로스 케이블로 연결합니다.  
   일반적인 USB 키보드로는 입력이 불가능하므로 크로스 케이블을 이용하여 로그인 하는 법을 설명합니다.
-  <a href="https://shop.pimoroni.com/products/usb-to-uart-serial-console-cable">UART-USB console cable</a>
+  <a href="https://shop.pimoroni.com/products/usb-to-uart-serial-console-cable">UART-USB console cable</a>를 
   가지고 계시면 바로 로그인 하면 됩니다.
 
 0. 호스트 컴퓨터의 네트워크 설정을 바꾸어 줍니다.  
@@ -148,28 +148,11 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
   ```
 0. wpad 설치하기  
   0. wpa_supplicant 이름을 변경합니다.(파일 충돌 예방)
+  '''
+  root@OpenWrt:/# mv /usr/sbin/wpa_supplicant /usr/sbin/wpa_supplicant2
+  '''
   0. opkg를 통하여 wpad를 설치합니다.  
     ```
-    MCLAB@KHU:~$ ssh root@192.168.1.1
-    BusyBox v1.22.1 (2015-03-29 09:12:13 PDT) built-in shell (ash)
-    Enter 'help' for a list of built-in commands.
-
-      _______                     ________        __
-     |       |.-----.-----.-----.|  |  |  |.----.|  |_
-     |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
-     |_______||   __|_____|__|__||________||__|  |____|
-              |__| W I R E L E S S   F R E E D O M
-     -----------------------------------------------------
-     CHAOS CALMER (Bleeding Edge, r45140)
-     -----------------------------------------------------
-      * 1 1/2 oz Gin            Shake with a glassful
-      * 1/4 oz Triple Sec       of broken ice and pour
-      * 3/4 oz Lime Juice       unstrained into a goblet.
-      * 1 1/2 oz Orange Juice
-      * 1 tsp. Grenadine Syrup
-     -----------------------------------------------------
-
-    root@OpenWrt:/# mv /usr/sbin/wpa_supplicant /usr/sbin/wpa_supplicant2
     root@OpenWrt:/# opkg install wpad_2015-03-25-1_brcm2708.ipk 
     Installing wpad (2015-03-25-1) to root...
     Configuring wpad.
@@ -177,14 +160,14 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
     ```
 
 ##4. 공유기로 설정
-<span class="TERM">OpenWrt</span>의 주요 설정은 UCI System(<em><strong><em class="u">U</em></strong>nified <strong><em class="u">C</em></strong>onfiguration <strong><em class="u">I</em></strong>nterface</em>)의해 이루어 집니다.
+**OpenWrt**의 주요 설정은 **UCI System**(Unified Configuration Interface)의해 이루어 집니다.
 UCI System의 모든 설정 파일은 /etc/config/ 디렉토리 아래에 있습니다.
 
->만약 *linux physical interface* 및 *linux virtual interface*를 모르신다면 <a href="http://wiki.openwrt.org/doc/networking/network.interfaces">여길</a> 를 먼저 참조하세요. <br />
+>만약 *linux physical interface* 및 *linux virtual interface*를 모르신다면 <a href="http://wiki.openwrt.org/doc/networking/network.interfaces">여길</a> 를 먼저 참조하세요.
 
 ###4.1 /etc/config/wireless 설정
 
-<span class="TERM">iw</span>를 대체하는 UCI System 설정파일로, 무선 랜 어뎁터를 설정합니다. <em>wifi-device</em>, <em>wifi-iface</em> 두 가지 항목을 수정해야합니다. <br />
+*iw*를 대체하는 UCI System 설정파일로, 무선 랜 어뎁터를 설정합니다. *wifi-device*, *wifi-iface* 두 가지 항목을 수정해야합니다.
 아래는 무선 랜 동글을 연결 했을 때 기본으로 작성되어있는 기본 설정입니다.
 ```
 config wifi-device  radio0
@@ -264,7 +247,7 @@ config wifi-iface
   다른 상세한 옵션을 보려면 <a href="http://wiki.openwrt.org/doc/uci/wireless">여기</a>를 참고하세요.
   
 ###4.2 /etc/config/network 설정
-<span class="TERM">ifconfig</span>를 대체하는 UCI System 설정파일로, 네트워크를 설정합니다. <br />
+*ifconfig*를 대체하는 UCI System 설정파일로, 네트워크를 설정합니다.
 
 ```
 config interface lan
@@ -305,7 +288,7 @@ config dhcp wlan
 
 ###4.4 /etc/config/firewall
 <p>
-<span class="TERM">iptables</span>를 대체하는 UCI System 설정파일로,
+*iptables*를 대체하는 UCI System 설정파일로,
 방화벽 설정 및 NAT 설정합니다. 이번 항목은 공유기로 작동하기 위한
 기본 설정만 하도록 하고 자세한 설명은 생략 하도록 하겠습니다.  
 만약 보다 상세한 설정을 하시려면 <a href="http://wiki.openwrt.org/doc/uci/firewall"><em>Firewall configuration</em></a>을 참조하십시오.
