@@ -8,7 +8,7 @@ Raspberry Pi2와 <span class="TERM">OpenWrt</span>를 이용하여 시중에서 
 <img src="images/routed.ap_v3.png">
 <figcaption>Fig1. Topology</figcaption>
 
-'''
+```
 root@openwrt:~$ ifconfig
 eth0      Link encap:Ethernet  HWaddr 00:90:f5:e4:cb:2c  
           inet addr:192.168.1.1  Bcast:192.168.1.255  Mask:255.255.255.0
@@ -35,7 +35,7 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
           TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
           RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
-'''
+```
 <figcaption>Fig2. Interface</figcaption>
 
 ##1. 준비물
@@ -46,7 +46,7 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
    <li>WiFi USB 동글</li>
  </ol>
 
-<h2>2. OpenWrt 설치</h2>
+##2. OpenWrt 설치
 
 <p>
   <ol>
@@ -85,9 +85,9 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
   더욱 자세한 정보를 얻으실려면 <a href="http://wiki.openwrt.org/toh/raspberry_pi_foundation/raspberry_pi">OpenWrt Wiki/Raspberry Pi</a> 항목을 참조 하십시오.
 </p>
 
-<h2>3. 로그인 및 초기 설정</h2>
+##3. 로그인 및 초기 설정
 
-<h3>3.1 로그인</h3>
+###3.1 로그인
 <span class="TERM">OpenWrt</span> 최초 설치 되었을 때 기본값으로 192.168.1.1의 주소를 갖습니다. <br />
 또한 root 계정의 비밀번호를 변경 하기 전까지 ssh 접속과 https 접속이 불가능 합니다. <br />
 더욱 자세한 정보는 <a href="http://wiki.openwrt.org/doc/howto/firstlogin">firstlogin</a> 를 참조하시길 바랍니다. <br />
@@ -101,9 +101,10 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
 
   <p>
     <li>호스트 컴퓨터의 네트워크 설정을 바꾸어 줍니다.</li>
-    <p class="console">
+```
 MCLAB@KHU:~$ sudo service network-manager stop
 MCLAB@KHU:~$ sudo ifconfig eth0 192.168.1.2/24
+```
     </p>
   </p>
 
@@ -111,12 +112,12 @@ MCLAB@KHU:~$ sudo ifconfig eth0 192.168.1.2/24
     <li>telnet을 이용하여 접속을 합니다.</li>
     앞에 언급했듯, <span class="TERM">OpenWrt</span>는 최초 로그인시 192.168.1.1의 주소를 갖습니다. <br />
     telnet을 이용하여 아래와 같이 접속을 시도 합니다.<br />
-    <p class="console">
+```
 MCLAB@KHU:~$ telnet 192.168.1.1
-    </p>
+```
 
     아래와 같은 화면이 출력되면 성공입니다.
-    <p class="console">
+```
 Trying 192.168.1.1...
 Connected to 192.168.1.1.
 Escape character is '^]'.
@@ -144,19 +145,20 @@ BusyBox v1.23.2 (2015-07-03 17:09:21 CEST) built-in shell (ash)
  -----------------------------------------------------
 
 root@openwrt:~$
-    </p>
+```
   </p>
+
 
   <p>
     <li>패스워드를 바꿔 줍니다.</li>
-    <p class="console">
+```
 root@openwrt:~$ passwd
 Changing password for root
 New password:
 Retype password:
 Password for root changed by root
 root@openwrt:~$
-</p>
+```
   </p>
 
 이제부터 telnet으로 접속 할 수 없으며, ssh 나 웹인터페이스로 접속해서 <br />
@@ -164,7 +166,7 @@ root@openwrt:~$
 
 </ol>
 
-<h3>3.2 필수 패키지 설치</h3>
+###3.2 필수 패키지 설치
 <p>
 2.1.1에서 사용한 커스텀 이미지를 이용하면, 대부분의 드라이버를 포함하고 있습니다. <br />
 따라서 드라이버를 제외한, 필수 패키지인 hostapd 경량버전인 <strong>wpad</strong>를 설치 하도록 합니다. <br />
@@ -178,9 +180,9 @@ root@openwrt:~$
     <p>    
       <li>Raspberry Pi2로 업로드 하기</li>
       호스트 컴퓨터에서 Raspberry Pi2 wpad를 업로드 합니다.
-      <p class="console">
+```
 MCLAB@KHU:~$ scp ./wpad_2015-03-25-1_brcm2708.ipk root@192.168.1.1:/
-      </p>
+```
     </p>
 
     <p>
@@ -189,7 +191,7 @@ MCLAB@KHU:~$ scp ./wpad_2015-03-25-1_brcm2708.ipk root@192.168.1.1:/
         <li> wpa_supplicant 이름을 변경합니다.(파일 충돌 예방) </li>
         <li> opkg를 통하여 wpad를 설치합니다. </li>
       </ol>
-      <p class="console">
+```
 MCLAB@KHU:~$ ssh root@192.168.1.1
 BusyBox v1.22.1 (2015-03-29 09:12:13 PDT) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
@@ -214,12 +216,12 @@ root@OpenWrt:/# opkg install wpad_2015-03-25-1_brcm2708.ipk
 Installing wpad (2015-03-25-1) to root...
 Configuring wpad.
 root@OpenWrt:/#
-      </p>
+```
     </p>
   </ol>
 </p>
 
-<h2>4. 공유기로 설정</h2>
+##4. 공유기로 설정
 
 <p>
 <span class="TERM">OpenWrt</span>의 주요 설정은 UCI System(<em><strong><em class="u">U</em></strong>nified <strong><em class="u">C</em></strong>onfiguration <strong><em class="u">I</em></strong>nterface</em>)의해 이루어 집니다.  <br />
@@ -229,11 +231,11 @@ UCI System의 모든 설정 파일은 /etc/config/ 디렉토리 아래에 있습
 
 </p><!-- 4. 공유기로 설정 -->
 
-<h3>4.1 /etc/config/wireless 설정</h3>
+###4.1 /etc/config/wireless 설정
 
 <span class="TERM">iw</span>를 대체하는 UCI System 설정파일로, 무선 랜 어뎁터를 설정합니다. <em>wifi-device</em>, <em>wifi-iface</em> 두 가지 항목을 수정해야합니다. <br />
 아래는 무선 랜 동글을 연결 했을 때 기본으로 작성되어있는 기본 설정입니다.
-<p class="console">
+```
 config wifi-device  radio0
         option type     mac80211
         option channel  11
@@ -249,7 +251,7 @@ config wifi-iface
         option mode     ap
         option ssid     OpenWrt
         option encryption none
-</p>
+```
 <p>
 
 <ol>
@@ -257,14 +259,14 @@ config wifi-iface
   <em>linux physical interface</em> 에 해당 하는 것으로, iw phy 명령을 통해서 확인 할 수 있습니다. <br />
   이 항목은 시스템에 의해서 설정 파일에 자동으로 type, hwmode, path, htmode 등이 설정되므로 channel의 정보만 수정해 봅시다.<br />
 
-<p class="console">
+```
 config wifi-device  radio0
         option type     mac80211
         option channel  6
         option hwmode   11a
         option path     pci0000:00/0000:00:00.0
         option htmode   HT20
-</p><!-- console -->
+```
 
 <p>
   <dl>
@@ -283,15 +285,14 @@ config wifi-device  radio0
   <em>linux virtual interface</em> 에 해당하는 것으로, iw dev info 통해서 확인 할 수 있습니다.<br />
   무선 설정은 /etc/config/wireless 수정을 통해 이루어 집니다. 아래와 같이 추가 합니다.<br />
 
-<p class="console">
+```
 config wifi-iface
         option device   radio0
         option network  wlan
         option mode     ap
         option ssid     OpenWrt
         option encryption none
-</p><!-- console -->
-
+```
 <p>
   <dl>
     <dt>option device</dt>
@@ -317,10 +318,10 @@ config wifi-iface
 
 </p><!-- 4.1 /etc/config/wireless 설정 -->
 
-<h3>4.2 /etc/config/network 설정</h3>
+###4.2 /etc/config/network 설정
 <span class="TERM">ifconfig</span>를 대체하는 UCI System 설정파일로, 네트워크를 설정합니다. <br />
 
-<p class="console">
+```
 config interface lan
         option ifname eth0
         option proto static
@@ -331,7 +332,7 @@ config interface wlan
         option proto static
         option ipaddr 192.168.100.1
         option netmask 255.255.255.0
-</p><!-- console -->
+```
 
 <p>
   <dl>
@@ -348,24 +349,24 @@ config interface wlan
   </dl>
 </p>
 
-<h3>4.3 /etc/config/dhcp 설정</h3>
+###4.3 /etc/config/dhcp 설정
 DHCP 설정입니다. 할당해 줄 주소의 범위와 시간 등을 지정해 줄 수 있습니다.
 
-<p class="console">
+```
 config dhcp wlan
         option interface   wlan
         option start       100
         option limit	   150
         option leasetime   12h
-</p><!-- console -->
+```
 
-<h3>4.4 /etc/config/firewall</h3>
+###4.4 /etc/config/firewall
 <p>
 <span class="TERM">iptables</span>를 대체하는 UCI System 설정파일로, 방화벽 설정 및 NAT 설정합니다. 이번 항목은 공유기로 작동하기 위한<br />
 기본 설정만 하도록 하고 자세한 설명은 생략 하도록 하겠습니다.<br />
 만약 보다 상세한 설정을 하시려면 <a href="http://wiki.openwrt.org/doc/uci/firewall"><em>Firewall configuration</em></a>을 참조하십시오.
 
-<p class="console">
+```
 config zone
         option name       lan
         list   network    lan
@@ -388,29 +389,30 @@ config forwarding
 config forwarding
         option src        wlan
         option dest       lan 
-</p><!-- console -->
+```
 
 </p>
 
-<h2>5. 변경사항 적용 </h2>
+##5. 변경사항 적용
 쉘에서 아래와 같이 입력합니다.
-<p class="console">
+
+```
 root@openwrt:~$ ifdown wlan
 root@openwrt:~$ ifup wlan
 root@openwrt:~$ /etc/init.d/firewall restart
 root@openwrt:~$ /etc/init.d/dnsmasq restart
-</p>
+```
 
 <p>
 !!!주의: <em>ifdown</em>, <em>ifup</em> 뒤의 인자는 4.2절에서 정의된 식별자입니다. 커널 인터페이스 이름이 아닙니다. <br />
 </p>
 
-<h2>6. 동작 확인</h2>
+##6. 동작 확인
 
 <p>
 Raspberry Pi2의 OpenWrt상에서 제대로 동작하는지 확인해 봅시다.
 
-<p class="console">
+```
 root@OpenWrt:/etc/config# iw dev
 phy#0
         Interface wlan0
@@ -420,8 +422,7 @@ phy#0
                 ssid OpenWrt
                 type AP
                 channel 11 (2462 MHz), width: 20 MHz, center1: 2462 MHz
-</p>
-
+```
 
 </body>
 
