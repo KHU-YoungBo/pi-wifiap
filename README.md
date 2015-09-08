@@ -119,7 +119,8 @@ BusyBox v1.23.2 (2015-07-03 17:09:21 CEST) built-in shell (ash)
 
 root@openwrt:~$
    ```
-1. 패스워드를 바꿔 줍니다.
+
+0. 패스워드를 바꿔 줍니다.
    ```
 root@openwrt:~$ passwd
 Changing password for root
@@ -132,34 +133,23 @@ root@openwrt:~$
    이제부터 telnet으로 접속 할 수 없으며, ssh 나 웹인터페이스로 접속해서 <br />
    설정 해야 합니다.
 
-</ol>
-
 ###3.2 필수 패키지 설치
-<p>
-2.1.1에서 사용한 커스텀 이미지를 이용하면, 대부분의 드라이버를 포함하고 있습니다. <br />
-따라서 드라이버를 제외한, 필수 패키지인 hostapd 경량버전인 <strong>wpad</strong>를 설치 하도록 합니다. <br />
+2.1.1에서 사용한 커스텀 이미지를 이용하면, 대부분의 드라이버를 포함하고 있습니다.
+따라서 드라이버를 제외한, 필수 패키지인 hostapd 경량버전인 <strong>wpad</strong>를 설치 하도록 합니다.
 
-  <ol>
-    <p>
-      <li>wpad 다운로드</li>
-      호스트 컴퓨터에서 <a href="https://downloads.openwrt.org/chaos_calmer/15.05-rc3/brcm2708/bcm2709/packages/base/wpad_2015-03-25-1_brcm2708.ipk">wpad (for Raspberry Pi2 package)</a>를 받습니다.
-    </p>
+0.  wpad 다운로드 <br />
+    호스트 컴퓨터에서 <a href="https://downloads.openwrt.org/chaos_calmer/15.05-rc3/brcm2708/bcm2709/packages/base/wpad_2015-03-25-1_brcm2708.ipk">
+    wpad (for Raspberry Pi2 package)</a>를 받습니다.
 
-    <p>    
-      <li>Raspberry Pi2로 업로드 하기</li>
-      호스트 컴퓨터에서 Raspberry Pi2 wpad를 업로드 합니다.
-```
-MCLAB@KHU:~$ scp ./wpad_2015-03-25-1_brcm2708.ipk root@192.168.1.1:/
-```
-    </p>
-
-    <p>
-      <li>wpad 설치하기</li>
-      <ol>
-        <li> wpa_supplicant 이름을 변경합니다.(파일 충돌 예방) </li>
-        <li> opkg를 통하여 wpad를 설치합니다. </li>
-      </ol>
-```
+0.  Raspberry Pi2로 업로드 하기
+    호스트 컴퓨터에서 Raspberry Pi2 wpad를 업로드 합니다.
+    ```
+    MCLAB@KHU:~$ scp ./wpad_2015-03-25-1_brcm2708.ipk root@192.168.1.1:/
+    ```
+0. wpad 설치하기
+  0. wpa_supplicant 이름을 변경합니다.(파일 충돌 예방)
+  0. opkg를 통하여 wpad를 설치합니다.
+  ```
 MCLAB@KHU:~$ ssh root@192.168.1.1
 BusyBox v1.22.1 (2015-03-29 09:12:13 PDT) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
@@ -184,10 +174,7 @@ root@OpenWrt:/# opkg install wpad_2015-03-25-1_brcm2708.ipk
 Installing wpad (2015-03-25-1) to root...
 Configuring wpad.
 root@OpenWrt:/#
-```
-    </p>
-  </ol>
-</p>
+  ```
 
 ##4. 공유기로 설정
 
