@@ -46,13 +46,13 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
 
 ##2. OpenWrt 설치
 
-0. 이미지 다운로드
-  *  커스텀 이미지 <br />
+0. 이미지 다운로드  
+  *  커스텀 이미지  
     본 예제에서 사용된 이미지입니다. <a href="http://dab-embedded.com/en/blogs/openwrt-on-arm-based-platform-raspberry-pi-2/">여기</a> 하단부에서 받으실 수 있습니다.
     각종 유틸리티와 무선 랜 드라이버가 기본 내장되있으므로 <strong> 본 이미지를 사용한다고 가정하고 진행하겠습니다. </strong>
     혹은 커스텀 이미지를 직접 빌드 <a href="http://dab-embedded.com/en/blogs/openwrt-on-arm-based-platform-raspberry-pi-2/">여기</a>를 참조 하세요.
 
-  *  공식 배포 이미지 <br />
+  *  공식 배포 이미지  
     <a href="https://downloads.openwrt.org/">여기</a>에서 필요한 이미지를 받을 수 있습니다.
     * Raspberry Pi1의 경우: brcm2708/brcm2708/
     * Raspberry Pi2의 경우: brcm2708/brcm2709/
@@ -60,7 +60,7 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
     하위 디렉토리에서 해당 sdcard 이미지를 받을 수 있습니다. 해당 이미지를 사용할 경우
     드라이버 등을 따로 잡아줘야 할 경우가 있습니다.
 
-0. sd 카드에 이미지 넣기
+0. sd 카드에 이미지 넣기  
   <a href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">여기</a>를 참조하세요.
   그 외 더욱 자세한 정보를 얻으실려면 <a href="http://wiki.openwrt.org/toh/raspberry_pi_foundation/raspberry_pi">OpenWrt Wiki/Raspberry Pi</a> 항목을 참조 하세요.
 
@@ -71,20 +71,20 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
 또한 root 계정의 비밀번호를 변경 하기 전까지 ssh 접속과 https 접속이 불가능 합니다.
 더욱 자세한 정보는 <a href="http://wiki.openwrt.org/doc/howto/firstlogin">firstlogin</a> 를 참조하시길 바랍니다.
 
-0. 호스트 컴퓨터와 Raspberry Pi를 크로스 케이블로 연결합니다. <br />
+0. 호스트 컴퓨터와 Raspberry Pi를 크로스 케이블로 연결합니다.  
   일반적인 USB 키보드로는 입력이 불가능하므로 크로스 케이블을 이용하여 로그인 하는 법을 설명합니다.
   <a href="https://shop.pimoroni.com/products/usb-to-uart-serial-console-cable">UART-USB console cable</a>
   가지고 계시면 바로 로그인 하면 됩니다.
 
-0. 호스트 컴퓨터의 네트워크 설정을 바꾸어 줍니다. <br />
+0. 호스트 컴퓨터의 네트워크 설정을 바꾸어 줍니다.  
   ```
   MCLAB@KHU:~$ sudo service network-manager stop
   MCLAB@KHU:~$ sudo ifconfig eth0 192.168.1.2/24
   ```
 
-0. telnet을 이용하여 접속을 합니다.
-  앞에 언급했듯, <span class="TERM">OpenWrt</span>는 최초 로그인시 192.168.1.1의 주소를 갖습니다. <br />
-  telnet을 이용하여 아래와 같이 접속을 시도 합니다.<br />
+0. telnet을 이용하여 접속을 합니다.  
+  앞에 언급했듯, <span class="TERM">OpenWrt</span>는 최초 로그인시
+  192.168.1.1의 주소를 갖습니다. telnet을 이용하여 아래와 같이 접속을 시도 합니다.
   ```
   MCLAB@KHU:~$ telnet 192.168.1.1
   ```
@@ -120,7 +120,7 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
   root@openwrt:~$
   ```
 
-0. 패스워드를 바꿔 줍니다.
+0. 패스워드를 바꿔 줍니다.  
   ```
   root@openwrt:~$ passwd
   Changing password for root
@@ -130,25 +130,25 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
   root@openwrt:~$
   ```
 
-  이제부터 telnet으로 접속 할 수 없으며, ssh 나 웹인터페이스로 접속해서 <br />
+  이제부터 telnet으로 접속 할 수 없으며, ssh 나 웹인터페이스로 접속해서
   설정 해야 합니다.
 
 ###3.2 필수 패키지 설치
 2.1.1에서 사용한 커스텀 이미지를 이용하면, 대부분의 드라이버를 포함하고 있습니다.
-따라서 드라이버를 제외한, 필수 패키지인 hostapd 경량버전인 <strong>wpad</strong>를 설치 하도록 합니다.
+따라서 드라이버를 제외한, 필수 패키지인 hostapd 경량버전인 **wpad**를 설치 하도록 합니다.
 
-0. wpad 다운로드 <br />
+0. wpad 다운로드  
   호스트 컴퓨터에서 <a href="https://downloads.openwrt.org/chaos_calmer/15.05-rc3/brcm2708/bcm2709/packages/base/wpad_2015-03-25-1_brcm2708.ipk">
   wpad (for Raspberry Pi2 package)</a>를 받습니다.
 
-0. Raspberry Pi2로 업로드 하기
+0. Raspberry Pi2로 업로드 하기  
   호스트 컴퓨터에서 Raspberry Pi2 wpad를 업로드 합니다.
   ```
   MCLAB@KHU:~$ scp ./wpad_2015-03-25-1_brcm2708.ipk root@192.168.1.1:/
   ```
-0. wpad 설치하기
+0. wpad 설치하기  
   0. wpa_supplicant 이름을 변경합니다.(파일 충돌 예방)
-  0. opkg를 통하여 wpad를 설치합니다.
+  0. opkg를 통하여 wpad를 설치합니다.  
     ```
     MCLAB@KHU:~$ ssh root@192.168.1.1
     BusyBox v1.22.1 (2015-03-29 09:12:13 PDT) built-in shell (ash)
@@ -205,32 +205,32 @@ config wifi-iface
 ```
 
 0. wifi-device section  
-   *linux physical interface* 에 해당 하는 것으로, iw phy 명령을 통해서 확인 할 수 있습니다.
-   이 항목은 시스템에 의해서 설정 파일에 자동으로 type, hwmode, path, htmode 등이 설정되므로 channel의 정보만 수정해 봅시다.
+  *linux physical interface* 에 해당 하는 것으로, iw phy 명령을 통해서 확인 할 수 있습니다.
+  이 항목은 시스템에 의해서 설정 파일에 자동으로 type, hwmode, path, htmode 등이 설정되므로 channel의 정보만 수정해 봅시다.
 
-```
-config wifi-device  radio0
-        option type     mac80211
-        option channel  6
-        option hwmode   11a
-        option path     pci0000:00/0000:00:00.0
-        option htmode   HT20
-```
+  ```
+  config wifi-device  radio0
+          option type     mac80211
+          option channel  6
+          option hwmode   11a
+          option path     pci0000:00/0000:00:00.0
+          option htmode   HT20
+  ```
 
-<p>
-  <dl>
-    <dt>config wifi-device</dt>
-    <dd>UCI System 내부적으로 사용될 wifi-device타입의 식별자를 정의합니다.</dd>
+  <p>
+    <dl>
+      <dt>config wifi-device</dt>
+      <dd>UCI System 내부적으로 사용될 wifi-device타입의 식별자를 정의합니다.</dd>
 
-    <dt>option channel</dt>
-    <dd>어뎁터가 사용할 물리 체널을 지정합니다.</dd>
+      <dt>option channel</dt>
+      <dd>어뎁터가 사용할 물리 체널을 지정합니다.</dd>
 
-    <dt>option disabled</dt>
-    <dd>디바이스의 기본 동작을 '끔' 상태로 설정합니다. 해당 항목은 삭제합니다.</dd>
-  </dl>
-</p>
+      <dt>option disabled</dt>
+      <dd>디바이스의 기본 동작을 '끔' 상태로 설정합니다. 해당 항목은 삭제합니다.</dd>
+    </dl>
+  </p>
 
-0. wifi-iface section
+0. wifi-iface section  
   *linux virtual interface* 에 해당하는 것으로, iw dev info 통해서 확인 할 수 있습니다.
   무선 설정은 /etc/config/wireless 수정을 통해 이루어 집니다. 아래와 같이 추가 합니다.
 
@@ -305,8 +305,9 @@ config dhcp wlan
 
 ###4.4 /etc/config/firewall
 <p>
-<span class="TERM">iptables</span>를 대체하는 UCI System 설정파일로, 방화벽 설정 및 NAT 설정합니다. 이번 항목은 공유기로 작동하기 위한<br />
-기본 설정만 하도록 하고 자세한 설명은 생략 하도록 하겠습니다.<br />
+<span class="TERM">iptables</span>를 대체하는 UCI System 설정파일로,
+방화벽 설정 및 NAT 설정합니다. 이번 항목은 공유기로 작동하기 위한
+기본 설정만 하도록 하고 자세한 설명은 생략 하도록 하겠습니다.  
 만약 보다 상세한 설정을 하시려면 <a href="http://wiki.openwrt.org/doc/uci/firewall"><em>Firewall configuration</em></a>을 참조하십시오.
 
 ```
