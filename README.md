@@ -39,14 +39,14 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
 <figcaption>Fig2. Interface</figcaption>
 
 ##1. 준비물
-   1. 크로스 케이블
-   1. 데스크탑(64bit, Ubuntu 14.04 LTS)
-   1. Raspberry Pi2
-   1. WiFi USB 동글
+   0. 크로스 케이블
+   0. 데스크탑(64bit, Ubuntu 14.04 LTS)
+   0. Raspberry Pi2
+   0. WiFi USB 동글
 
 ##2. OpenWrt 설치
 
-1. 이미지 다운로드
+0. 이미지 다운로드
    *  커스텀 이미지 <br />
       본 예제에서 사용된 이미지입니다. <a href="http://dab-embedded.com/en/blogs/openwrt-on-arm-based-platform-raspberry-pi-2/">여기</a> 하단부에서 받으실 수 있습니다.
       각종 유틸리티와 무선 랜 드라이버가 기본 내장되있으므로 <strong> 본 이미지를 사용한다고 가정하고 진행하겠습니다. </strong>
@@ -56,32 +56,33 @@ wlan0     Link encap:Ethernet  HWaddr 2c:d0:5a:61:5c:f4
       <a href="https://downloads.openwrt.org/">여기</a>에서 필요한 이미지를 받을 수 있습니다.
       * Raspberry Pi1의 경우: brcm2708/brcm2708/
       * Raspberry Pi2의 경우: brcm2708/brcm2709/
+      
       하위 디렉토리에서 해당 sdcard 이미지를 받을 수 있습니다. 해당 이미지를 사용할 경우
       드라이버 등을 따로 잡아줘야 할 경우가 있습니다.
 
-2. sd 카드에 이미지 넣기
+0. sd 카드에 이미지 넣기
   <a href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">여기</a>를 참조하세요.
-  더욱 자세한 정보를 얻으실려면 <a href="http://wiki.openwrt.org/toh/raspberry_pi_foundation/raspberry_pi">OpenWrt Wiki/Raspberry Pi</a> 항목을 참조 하십시오.
+  그 외 더욱 자세한 정보를 얻으실려면 <a href="http://wiki.openwrt.org/toh/raspberry_pi_foundation/raspberry_pi">OpenWrt Wiki/Raspberry Pi</a> 항목을 참조 하세요.
 
 ##3. 로그인 및 초기 설정
 
 ###3.1 로그인
 <span class="TERM">OpenWrt</span> 최초 설치 되었을 때 기본값으로 192.168.1.1의 주소를 갖습니다. <br />
-또한 root 계정의 비밀번호를 변경 하기 전까지 ssh 접속과 https 접속이 불가능 합니다. <br />
-더욱 자세한 정보는 <a href="http://wiki.openwrt.org/doc/howto/firstlogin">firstlogin</a> 를 참조하시길 바랍니다. <br />
+또한 root 계정의 비밀번호를 변경 하기 전까지 ssh 접속과 https 접속이 불가능 합니다.
+더욱 자세한 정보는 <a href="http://wiki.openwrt.org/doc/howto/firstlogin">firstlogin</a> 를 참조하시길 바랍니다.
 
-1. 호스트 컴퓨터와 Raspberry Pi를 크로스 케이블로 연결합니다. <br />
+0. 호스트 컴퓨터와 Raspberry Pi를 크로스 케이블로 연결합니다. <br />
    일반적인 USB 키보드로는 입력이 불가능하므로 크로스 케이블을 이용하여 로그인 하는 법을 설명합니다.
    <a href="https://shop.pimoroni.com/products/usb-to-uart-serial-console-cable">UART-USB console cable</a>
    가지고 계시면 바로 로그인 하면 됩니다.
 
-2. 호스트 컴퓨터의 네트워크 설정을 바꾸어 줍니다. <br />
+0. 호스트 컴퓨터의 네트워크 설정을 바꾸어 줍니다. <br />
    ```
    MCLAB@KHU:~$ sudo service network-manager stop
    MCLAB@KHU:~$ sudo ifconfig eth0 192.168.1.2/24
    ```
 
-3. telnet을 이용하여 접속을 합니다.
+0. telnet을 이용하여 접속을 합니다.
    앞에 언급했듯, <span class="TERM">OpenWrt</span>는 최초 로그인시 192.168.1.1의 주소를 갖습니다. <br />
    telnet을 이용하여 아래와 같이 접속을 시도 합니다.<br />
    ```
